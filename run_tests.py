@@ -1,10 +1,25 @@
 #DON'T MAKE CHANGES TO THIS FILE
 
 #write tests for all the questions here
-
 import unittest
 
-from tests.question_tests import question_tests
+def main():
+    print("Discovering and running tests...")
 
-suite = unittest.TestLoader().loadTestsFromModule(question_tests)
-unittest.TextTestRunner(verbosity=2).run(suite)
+    # Load all test cases from the 'tests' directory
+    loader = unittest.TestLoader()
+    test_suite = loader.discover('tests')
+
+    # Run the test suite
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(test_suite)
+
+    # Summary of results
+    if result.wasSuccessful():
+        print("\nAll tests passed!")
+    else:
+        print(f"\n{len(result.failures)} test(s) failed.")
+        print(f"{len(result.errors)} test(s) had errors.")
+
+if __name__ == "__main__":
+    main()
